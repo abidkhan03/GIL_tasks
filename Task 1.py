@@ -1,7 +1,7 @@
 # Task 1 OCR Based Search System
 
 #  Design a system that asks to browse the folder
-
+# import libraries
 import os
 import tkinter as tk
 from tkinter import filedialog

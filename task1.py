@@ -5,6 +5,12 @@
 import os
 import tkinter as tk
 from tkinter import filedialog
+import sqlite3
+from tkinter import ttk
+import pytesseract
+from PIL import Image
+import requests
+
 
 root = tk.Tk()
 root.withdraw()
@@ -17,8 +23,6 @@ print(book_name)
 
 #  extract text (using OCR) from the images
 
-import pytesseract
-from PIL import Image
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
@@ -26,12 +30,12 @@ def ocr_core(filename):
     """
     This function will handle the core OCR processing of images.
     """
-    text = pytesseract.image_to_string(Image.open(filename))  # We'll use Pillow's Image class to open the image and pytesseract to detect the string in the image
+    # it will use Pillow's Image class to open the image and pytesseract to detect the string in the image
+    text = pytesseract.image_to_string(Image.open(filename))  
     return text
 
 #  save those in the database too
 
-import sqlite3
 
 conn = sqlite3.connect('books.db')
 c = conn.cursor()
@@ -47,8 +51,6 @@ for i in os.listdir(book_name):
 #  design the search box in such a way that if someone types anything that is searched in the database 
 #  with autofill and returns the book title, and page number on which that text has appeared
 
-import tkinter as tk
-from tkinter import ttk
 
 root = tk.Tk()
 root.title('Search Box')
@@ -75,8 +77,6 @@ tree.pack()
 root.mainloop()
 
 #  On clicking that page should be downloaded   
-
-import requests
 
 def download(url, filename):
     with open(filename, 'wb') as f:

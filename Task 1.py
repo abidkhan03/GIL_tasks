@@ -11,7 +11,7 @@ import pytesseract
 from PIL import Image
 import requests
 
-
+# root setup
 root = tk.Tk()
 root.withdraw()
 
